@@ -1,10 +1,5 @@
 {
   "name": "clinica-templo-arezzo",
   "version": "1.0.0",
-  "scripts": {
-    "build": "cd client && npm install && npm run build && cp -r dist/* .",
-    "start": "cd client && npm start"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  "private": true
 }
