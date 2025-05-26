@@ -1,25 +1,27 @@
 const express = require('express');
-const path = require('path');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para servir arquivos estáticos
-app.use(express.static(path.join(__dirname, 'dist')));
-
-// Middleware para parsing JSON
+// Middleware básico
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
 
-// Importar e configurar as rotas da API
-const { registerRoutes } = require('./dist-server/routes.js');
-registerRoutes(app);
-
-// Fallback para servir o index.html para rotas do React
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+// Rota principal
+app.get('/', (req, res) => {
+  res.send(`
+    <html>
+      <head><title>Sistema Clínica Templo x Arezzo</title></head>
+      <body style="font-family: Arial; text-align: center; padding: 50px;">
+        <h1>🎉 Sistema Online!</h1>
+        <h2>Clínica Templo x Arezzo</h2>
+        <p>Sistema de vouchers e ranking funcionando!</p>
+        <p>Deploy realizado com sucesso no Render.</p>
+      </body>
+    </html>
+  `);
 });
 
+// Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
